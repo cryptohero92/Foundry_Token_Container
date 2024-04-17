@@ -22,7 +22,7 @@ contract CounterTest is Test {
         assertEq(counter.number(), x);
     }
 
-    function testMyNumber() public {
+    function testMyNumber() public view {
         assertEq(counter.myNumber(), 42);
     }
 
