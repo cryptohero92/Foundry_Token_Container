@@ -21,6 +21,12 @@ https://book.getfoundry.sh/
 $ forge build
 ```
 
+### Install Dependencies
+
+```shell
+$ forge install OpenZeppelin/openzeppelin-contracts
+```
+
 ### Test
 
 ```shell
@@ -59,6 +65,27 @@ $ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --pri
 
 $ source ../.env
 $ forge script Container.s.sol:ContainerDeployScript --broadcast --verify -vvvv --rpc-url sepolia
+
+$ forge create --rpc-url <your_rpc_url> \
+    --constructor-args "ForgeUSD" "FUSD" 18 1000000000000000000000 \
+    --private-key <your_private_key> \
+    --etherscan-api-key <your_etherscan_api_key> \
+    --verify \
+    src/MyToken.sol:MyToken
+```
+
+### Verify Contract
+
+```shell
+$ forge verify-contract \
+    --chain-id 11155111 \
+    --num-of-optimizations 1000000 \
+    --watch \
+    --constructor-args $(cast abi-encode "constructor(string,string,uint256,uint256)" "ForgeUSD" "FUSD" 18 1000000000000000000000) \
+    --etherscan-api-key <your_etherscan_api_key> \
+    --compiler-version v0.8.10+commit.fc410830 \
+    <the_contract_address> \
+    src/MyToken.sol:MyToken 
 ```
 
 ### Cast
